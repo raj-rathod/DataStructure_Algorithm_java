@@ -74,9 +74,47 @@ public class SingleLinkedList {
 		}
 		previous.next = null;
 	}
+	
+	public void deleteFromSpecificPosition(int position) {
+		if(position == 1) {
+			head = head.next;
+		}else {
+			LinkedNode current = head;
+			LinkedNode previous = head;
+			int count = 1;
+			while(current != null && count < position) {
+				count++;
+				previous = current;
+				current = current.next;
+			}
+			if(current != null) {
+				previous.next = current.next;
+			}else {
+				System.out.println("Position not valid");
+			}
+		}
+	}
+	public int linkedListLength() {
+	   LinkedNode current = head;
+	   int count = 1 ;
+	   if(current == null) {
+		   return 0;
+	   }else {
+		   while(current.next != null) {
+			   count++;
+			   current = current.next;
+		   }
+		   return count;
+	   }
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		singleLinkedListOperations();
+
+	}
+	
+	public static void singleLinkedListOperations() {
 		SingleLinkedList sll = new SingleLinkedList();
 		sll.head = new LinkedNode(10);
 		LinkedNode second = new LinkedNode(2);
@@ -90,9 +128,9 @@ public class SingleLinkedList {
 		sll.insertAtFixedPosition(0,2);
 		sll.displayLinked(); 
 		//sll.deleteNodeFromFirst();
-		sll.deleteNodeFromEnd();
+		sll.deleteFromSpecificPosition(2);
 		sll.displayLinked();
-
+		System.out.println("Linked List Length -->"+ sll.linkedListLength());
 	}
 
 }
