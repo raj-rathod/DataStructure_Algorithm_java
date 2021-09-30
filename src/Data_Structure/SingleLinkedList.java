@@ -107,7 +107,52 @@ public class SingleLinkedList {
 		   return count;
 	   }
 	}
-
+	//Find a key in the linked list
+	public boolean findKey(int key) {
+		LinkedNode current = head;
+		if(current == null) {
+			return false;
+		}else {
+			while(current != null) {
+				if(current.value == key) {
+					return true;
+				}
+				current = current.next;
+			}
+			return false;
+		}
+	}
+	//find middle node in the list 
+	public LinkedNode findMiddleNode() {
+		LinkedNode slwPtr = head;
+		LinkedNode fastPtr = head; 
+		if(head == null) {
+			return head;
+		}else {
+			while(fastPtr != null && fastPtr.next != null) {
+				fastPtr = fastPtr.next.next; 
+				slwPtr = slwPtr.next;
+			}
+			return slwPtr;
+		}
+	}
+	// revesre given linked list
+	public void reverseLinkedList() {
+		LinkedNode current = head;
+		LinkedNode previous = null;
+		LinkedNode next = null;
+		if(current == null ) {
+			return;
+		}else {
+			while(current != null) {
+				next = current.next;
+				current.next = previous;
+				previous = current;
+				current = next;
+			}
+			head = previous;
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		singleLinkedListOperations();
@@ -127,10 +172,13 @@ public class SingleLinkedList {
 		sll.insertAtEnd(12);
 		sll.insertAtFixedPosition(0,2);
 		sll.displayLinked(); 
+		System.out.println("middle node of the given List "+ sll.findMiddleNode().value);
+		//System.out.println(6+" Key is present in the list "+ sll.findKey(6));
 		//sll.deleteNodeFromFirst();
-		sll.deleteFromSpecificPosition(2);
+		//sll.deleteFromSpecificPosition(2);
+		sll.reverseLinkedList();
 		sll.displayLinked();
-		System.out.println("Linked List Length -->"+ sll.linkedListLength());
+		//System.out.println("Linked List Length -->"+ sll.linkedListLength());
 	}
 
 }
